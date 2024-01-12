@@ -11,7 +11,7 @@ class UpdateprojectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class UpdateprojectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['required','min:3','max:200','unique:projects'],
+            'description'=>['nullable'],
+            'language'=>['nullable']
+        ];
+    }
+    public function messages(){
+        return [
+            'name.required'=>'Il titolo è obbligatorio',
+            'name.min'=>'Il titolo deve avere almeno :min caratteri',
+            'name.max'=>'Il titolo deve avere massimo :max caratteri',
+            'name.unique'=>'Il titolo è univoco',
+
         ];
     }
 }
+

@@ -14,13 +14,12 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
-        $projects = config('db.projects');
-        foreach ($projects as $project) {
+            $projects = config('db.projects');
+            foreach ($projects as $project) {
             $new_project = new Project();
             $new_project->name = $project['name'];
             $new_project->description = $project['description'];
             $new_project->language = $project['language'];
-            $new_project->slug =Str::slug($project['name'].'-');
             $new_project->save();
         }
     }

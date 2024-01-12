@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\project;
 use App\Http\Requests\StoreprojectRequest;
 use App\Http\Requests\UpdateprojectRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -21,9 +24,9 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(project $project)
     {
-        //
+        return view('admin.project.create',compact('project'));
     }
 
     /**
@@ -31,7 +34,11 @@ class ProjectController extends Controller
      */
     public function store(StoreprojectRequest $request)
     {
-        //
+        $formData = $request->validated();
+
+        $newProject = Project::create($formData);
+        return to_route('admin.projects.show',$newProject->id);
+
     }
 
     /**
@@ -39,7 +46,7 @@ class ProjectController extends Controller
      */
     public function show(project $project)
     {
-        //
+        return view('admin.project.show',compact('project'));
     }
 
     /**
@@ -47,7 +54,7 @@ class ProjectController extends Controller
      */
     public function edit(project $project)
     {
-        //
+        return view('admin.project.edit',compact('project'));
     }
 
     /**
@@ -55,7 +62,10 @@ class ProjectController extends Controller
      */
     public function update(UpdateprojectRequest $request, project $project)
     {
-        //
+        $formData = $request->validated();
+        $project->fill($formData);
+        $project->update();
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
@@ -63,6 +73,7 @@ class ProjectController extends Controller
      */
     public function destroy(project $project)
     {
-        //
+        $project->delete();
+        return to_route('admin.projects.index')->with('message', "Il progetto $project->name è stato eliminato");
     }
 }

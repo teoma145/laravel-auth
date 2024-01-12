@@ -26,10 +26,21 @@
                         <td data-th="description">{{$project->description}}</td>
                         <td data-th="linguaggi" class="text-center">{{$project->language}}</td>
                         <td class="actions">
-                            <a href="" class="btn btn-outline-danger btn-sm delete-product"><i class="fa fa-trash"></i></a>
+                            <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?')">
+                                    <i class="fa fa-trash"></i> Elimina
+                                </button>
+                            </form>
+                            <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-outline-success btn-sm"></i>edit</a>
+                            <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-outline-success btn-sm"></i>dettagli</a>
                         </td>
                     </tr>
                 @endforeach
+                    <tr>
+                        <a href="{{route('admin.projects.create')}}" class="my-4 btn btn-outline-success btn-sm"></i>Add new Project</a>
+                    </tr>
             </tbody>
         </table>
     </div>
