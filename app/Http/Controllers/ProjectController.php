@@ -36,8 +36,9 @@ class ProjectController extends Controller
     {
         $formData = $request->validated();
 
-
-
+        $slug = project::getSlug($formData['name']);
+        $formData['slug'] = $slug;
+        $formData['user_id'] = Auth::id();
         if($request->hasFile('image')){
             $path = Storage::put('uploads',$formData['image']);
             $formData['image'] = $path;

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name')->unique();
+            $table->string('slug', 255)->unique();
             $table->string('description')->nullable();
             $table->string('language')->nullable();
             $table->string('image')->nullable();
