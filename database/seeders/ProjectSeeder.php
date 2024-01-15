@@ -20,6 +20,7 @@ class ProjectSeeder extends Seeder
             $new_project->name = $project['name'];
             $new_project->description = $project['description'];
             $new_project->language = $project['language'];
+            $new_project->image = $project['image'];
             $new_project->save();
         }
     }

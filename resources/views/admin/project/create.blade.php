@@ -21,9 +21,16 @@
             @enderror
         </div>
         <div>
-            <label for="image">language</label>
-            <input type="text" class="form-control @error('language') is-invalid @enderror" name="language" id="image" value="{{ old('language') }}">
+            <label for="language">language</label>
+            <input type="text" class="form-control @error('language') is-invalid @enderror" name="language" id="language" value="{{ old('language') }}">
             @error('language')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="image">Image</label>
+            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" value="{{old('image')}}">
+            @error('image')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
