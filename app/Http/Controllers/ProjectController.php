@@ -36,6 +36,14 @@ class ProjectController extends Controller
     {
         $formData = $request->validated();
 
+
+
+        if($request->hasFile('image')){
+            $path = Storage::put('uploads',$formData['image']);
+            $formData['image'] = $path;
+
+
+        }
         $newProject = Project::create($formData);
         return to_route('admin.projects.show',$newProject->id);
 

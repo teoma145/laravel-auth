@@ -4,6 +4,6 @@
     <h1>{{ $project->name }}</h1>
     <p>{{ $project->description }}</p>
     <h2>{{ $project->language }}</h2>
-    <img src="{{ $project->image }}" alt="{{ $project->name }}">
+    <img src="{{asset('storage/'.$project->image)}}" alt="{{ $project->name }}">
 </section>
 @endsection
